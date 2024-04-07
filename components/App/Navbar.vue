@@ -12,18 +12,21 @@
         class="px-4 text-primary hover:text-secondary"
         :class="{ 'text-secondary': $route.path === '/login' }"
       >
-        <NuxtLink href="/#how-it-works">How it workrs</NuxtLink>
+        <NuxtLink href="/#how-it-works" class="font-bold"
+          >How it works</NuxtLink
+        >
       </li>
       <li
         class="px-4 text-primary hover:text-secondary"
         :class="{ 'text-secondary': $route.path === '/login' }"
       >
-        <NuxtLink href="/#creator">Creator</NuxtLink>
+        <NuxtLink href="/#creator" class="font-bold">Creator</NuxtLink>
       </li>
       <li class="px-4 text-primary hover:text-secondary">
         <NuxtLink
           href="/login"
           :class="{ 'text-secondary': $route.path === '/login' }"
+          class="font-bold"
           >Login</NuxtLink
         >
       </li>
@@ -31,6 +34,7 @@
         <NuxtLink
           href="/register"
           :class="{ 'text-secondary': $route.path === '/register' }"
+          class="font-bold"
           >Register</NuxtLink
         >
       </li>

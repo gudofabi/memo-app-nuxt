@@ -8,12 +8,21 @@ export default {
     "./app.vue",
     "./error.vue",
   ],
+
   theme: {
-    colors: {
-      primary: "#0C2D57",
-      secondary: "#FC6736",
+    extend: {
+      fontFamily: {
+        "sf-compact": ["SF Compact", "sans-serif"],
+        quicksand: ["Quicksand", "sans-serif"],
+      },
+      colors: {
+        primary: "#0C2D57",
+        secondary: "#FC6736",
+      },
+      boxShadow: {
+        "3xl": "0 7px 11px 2px rgba(0, 0, 0, 0.3)",
+      },
     },
-    extend: {},
   },
   plugins: [],
 };

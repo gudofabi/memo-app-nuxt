@@ -1,7 +1,7 @@
 <template>
   <AppNavbar />
 
-  <div class="bg-gray-400">
+  <div>
     <slot />
   </div>
 </template>
