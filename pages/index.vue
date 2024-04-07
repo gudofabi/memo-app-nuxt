@@ -87,7 +87,7 @@
       />
     </div>
   </div>
-  <div id="creator" class="bg-primary text-white text-center py-28">
+  <div id="creator" class="bg-primary text-white text-center pt-28 pb-3">
     <div class="container mx-auto relative">
       <img
         src="@/assets/img/chart.svg"
@@ -125,19 +125,18 @@
         />
       </div>
       <div class="footer w-full">
-        <ul id="social border-b border-white flex items-center">
-          <li v-for="(social, index) in data_social" :key="index">
-            <a :href="social.link" class="text-white w-[40px] h-[40px]">
-              <component
-                :is="`PhosphorIcon${social.icon}`"
-                size="18"
-                weight="regular"
-                class="mr-2 text-white bg-white"
-              />
+        <ul id="social" class="border-b border-white flex justify-center py-5">
+          <li
+            v-for="(social, index) in data_social"
+            :key="index"
+            class="text-white hover:text-secondary transition-all w-[40px] h-[40px] mr-9 last:mr-0"
+          >
+            <a :href="social.link" class="text-4xl">
+              <span :class="[social.icon]"></span>
             </a>
           </li>
         </ul>
-        <p>kupown.com &copy; 2024</p>
+        <p class="py-5 text-base">kupown.com &copy; 2024</p>
       </div>
     </div>
   </div>
@@ -164,20 +163,20 @@ const data_process = reactive([
 
 const data_social = ref([
   {
-    icon: "Globe",
-    link: "",
+    icon: "ph ph-globe",
+    link: "https://www.gudofabi.com/",
   },
   {
-    icon: "LinkedinLogo",
-    link: "",
+    icon: "ph ph-linkedin-logo",
+    link: "https://www.linkedin.com/in/gudofabi/",
   },
   {
-    icon: "BehanceLogo",
-    link: "",
+    icon: "ph ph-behance-logo",
+    link: "https://www.behance.net/gudofabi",
   },
   {
-    icon: "PinterestLogo",
-    link: "",
+    icon: "ph ph-pinterest-logo",
+    link: "https://www.pinterest.ph/fabi_ape/",
   },
 ]);
 

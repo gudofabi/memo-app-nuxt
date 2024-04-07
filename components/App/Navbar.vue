@@ -16,12 +16,6 @@
           >How it works</NuxtLink
         >
       </li>
-      <li
-        class="px-4 text-primary hover:text-secondary"
-        :class="{ 'text-secondary': $route.path === '/login' }"
-      >
-        <NuxtLink href="/#creator" class="font-bold">Creator</NuxtLink>
-      </li>
       <li class="px-4 text-primary hover:text-secondary">
         <NuxtLink
           href="/login"
