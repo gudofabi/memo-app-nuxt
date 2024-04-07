@@ -18,9 +18,10 @@ export default {
       colors: {
         primary: "#0C2D57",
         secondary: "#FC6736",
+        "primay-2": "#1C4274",
       },
       boxShadow: {
-        "3xl": "0 7px 11px 2px rgba(0, 0, 0, 0.3)",
+        "3xl": "0 7px 11px 2px rgba(0, 0, 0, 0.2)",
       },
     },
   },

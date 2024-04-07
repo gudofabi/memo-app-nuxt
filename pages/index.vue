@@ -97,9 +97,9 @@
       <h3 class="text-4xl pb-16 font-quicksand tracking-wider">
         Meet the handsome creator...
       </h3>
-      <div id="about-me" class="relative mx-auto w-[900px]">
+      <div id="about-me" class="relative mx-auto w-[900px] h-auto mb-40">
         <div
-          class="mx-auto w-[70px] h-[70px] border-2 border-white rounded-full shadow-lg relative z-10 mb-4"
+          class="mx-auto w-[70px] h-[70px] border-2 border-white rounded-full shadow-3xl relative z-10 mb-4"
         >
           <img
             src="@/assets/img/iroh.png"
@@ -121,15 +121,23 @@
         <img
           src="@/assets/img/paper.png"
           alt=""
-          class="absolute w-full h-auto top-0 z-0 object-fill"
+          class="absolute w-full h-[300px] top-0 z-0 object-contain"
         />
       </div>
-      <div class="footer">
-        <ul id="social">
-          <li>
-            <a href="http://"></a>
+      <div class="footer w-full">
+        <ul id="social border-b border-white flex items-center">
+          <li v-for="(social, index) in data_social" :key="index">
+            <a :href="social.link" class="text-white w-[40px] h-[40px]">
+              <component
+                :is="`PhosphorIcon${social.icon}`"
+                size="18"
+                weight="regular"
+                class="mr-2 text-white bg-white"
+              />
+            </a>
           </li>
         </ul>
+        <p>kupown.com &copy; 2024</p>
       </div>
     </div>
   </div>
@@ -156,19 +164,19 @@ const data_process = reactive([
 
 const data_social = ref([
   {
-    icon: "",
+    icon: "Globe",
     link: "",
   },
   {
-    icon: "",
+    icon: "LinkedinLogo",
     link: "",
   },
   {
-    icon: "",
+    icon: "BehanceLogo",
     link: "",
   },
   {
-    icon: "",
+    icon: "PinterestLogo",
     link: "",
   },
 ]);

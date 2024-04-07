@@ -2,15 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './fonts.scss';
+@import "./fonts.scss";
 
-body, html {
-  font-family: 'Quicksand';
+body,
+html {
+  font-family: "Quicksand";
   font-size: 16px;
 }
 
-h1, h2, h3 {
-  font-family: 'SF Compact';
+h1,
+h2,
+h3 {
+  font-family: "SF Compact";
 }
 
 .container {

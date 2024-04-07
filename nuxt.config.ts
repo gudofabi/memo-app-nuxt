@@ -2,10 +2,15 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      link: [{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap' }]
-    }
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap",
+        },
+      ],
+    },
   },
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "nuxt-phosphor-icons"],
   devtools: { enabled: true },
   alias: {
     assets: "/<rootDir>/assets",
