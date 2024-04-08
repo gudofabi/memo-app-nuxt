@@ -15,7 +15,8 @@
     </div>
     <div class="absolute right-0 -bottom-[45px] w-[338px]">
       <img
-        src="@/assets/img/header-img.svg"
+        :class="{ 'slide-in-frm-right': data_isImageVisible }"
+        src="/img/header-img.svg"
         class="w-auto h-auto"
         alt="Money floating"
       />
@@ -26,10 +27,11 @@
     class="container mx-auto flex relative h-[850px] pb-20 mb-28"
   >
     <div
+      :style="{ top: data_floatingManPosition + 'px' }"
       class="w-[214px] lg:w-[250px] h-[264px] lg:h-[300px] absolute -top-[25px] -left-[50px]"
     >
       <img
-        src="@/assets/img/floating-man.svg"
+        src="/img/floating-man.svg"
         alt=""
         class="w-full h-full object-cover"
       />
@@ -61,13 +63,13 @@
           <div class="w-[40px] h-[40px] relative mr-4">
             <img
               v-if="item.isHovering"
-              src="@/assets/img/checked.gif"
+              src="/img/checked.gif"
               alt=""
               class="w-full h-full object-contain"
             />
             <img
               v-else
-              src="@/assets/img/checked.png"
+              src="/img/checked.png"
               alt=""
               class="w-full h-full object-contain"
             />
@@ -80,32 +82,24 @@
       </ul>
     </div>
     <div class="absolute bottom-0">
-      <img
-        src="@/assets/img/window.svg"
-        alt=""
-        class="w-full h-full object-cover"
-      />
+      <img src="/img/window.svg" alt="" class="w-full h-full object-cover" />
     </div>
   </div>
   <div id="creator" class="bg-primary text-white text-center pt-28 pb-3">
     <div class="container mx-auto relative">
-      <img
-        src="@/assets/img/chart.svg"
-        alt=""
-        class="absolute right-0 -top-[320px]"
-      />
+      <img src="/img/chart.svg" alt="" class="absolute right-0 -top-[320px]" />
       <h3 class="text-4xl pb-16 font-quicksand tracking-wider">
         Meet the handsome creator...
       </h3>
       <div id="about-me" class="relative mx-auto w-[900px] h-auto mb-40">
         <div
-          class="mx-auto w-[70px] h-[70px] border-2 border-white rounded-full shadow-3xl relative z-10 mb-4"
+          @click="playSound"
+          class="mx-auto w-[70px] scale-100 hover:scale-110 h-[70px] border-2 border-white rounded-full shadow-3xl relative z-10 mb-4 ease-in-out cursor-pointer"
         >
-          <img
-            src="@/assets/img/iroh.png"
-            alt=""
-            class="w-full h-full absolute"
-          />
+          <img src="/img/iroh.png" alt="" class="w-full h-full absolute" />
+          <audio ref="refAudioSound" autoplay>
+            <source src="/sounds/pew.mp3" type="audio/mpeg" />
+          </audio>
         </div>
         <div class="text-black z-10 relative text-sm w-[640px] mx-auto">
           <p class="font-sf-compact font-medium text-base mb-2">Gudo Fabi</p>
@@ -119,7 +113,7 @@
           </p>
         </div>
         <img
-          src="@/assets/img/paper.png"
+          src="/img/paper.png"
           alt=""
           class="absolute w-full h-[300px] top-0 z-0 object-contain"
         />
@@ -129,9 +123,9 @@
           <li
             v-for="(social, index) in data_social"
             :key="index"
-            class="text-white hover:text-secondary transition-all w-[40px] h-[40px] mr-9 last:mr-0"
+            class="text-white hover:text-secondary transition-all w-[40px] h-[40px] mr-9 last:mr-0 scale-100 hover:scale-110 ease-in-out"
           >
-            <a :href="social.link" class="text-4xl">
+            <a :href="social.link" class="text-4xl" target="_blank">
               <span :class="[social.icon]"></span>
             </a>
           </li>
@@ -160,7 +154,6 @@ const data_process = reactive([
     isHovering: false,
   },
 ]);
-
 const data_social = ref([
   {
     icon: "ph ph-globe",
@@ -179,11 +172,36 @@ const data_social = ref([
     link: "https://www.pinterest.ph/fabi_ape/",
   },
 ]);
+const data_floatingManPosition = ref(-25); // Initial position of the floating man
+const data_isImageVisible = ref(false);
+const refAudioSound = ref(null);
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+  data_isImageVisible.value = true;
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
+const playSound = () => {
+  if (refAudioSound.value) {
+    const promise = refAudioSound.value
+      .play()
+      .catch((error: any) => console.error("Error playing the sound:", error));
+  }
+};
 
 const playGif = (index: number) => {
   data_process[index].isHovering = true;
 };
 const pauseGif = (index: number) => {
   data_process[index].isHovering = false;
+};
+
+const handleScroll = () => {
+  const scrollPosition = window.scrollY;
+  data_floatingManPosition.value = -25 - scrollPosition * 0.1; // Adjust the 0.1 to change the speed
 };
 </script>
