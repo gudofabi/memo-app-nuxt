@@ -22,7 +22,7 @@
       <img
         :class="{ 'slide-in-frm-right': data_isImageVisible }"
         src="/img/header-img.svg"
-        class="w-auto h-auto"
+        class="w-auto h-auto opacity-0"
         alt="Money floating"
       />
       <audio ref="refMoneySound">

@@ -5,7 +5,7 @@
     <div>
       <NuxtLink
         href="/"
-        class="bg-gradient-to-t from-secondary via-orange-400 drop-shadow-2xl to-secondary text-transparent bg-clip-text uppercase font-bold text-3xl font-sf-pro"
+        class="text-secondary uppercase font-bold text-3xl font-sf-pro"
         >Kupown</NuxtLink
       >
     </div>
