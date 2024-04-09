@@ -42,3 +42,16 @@
 .slide-in-frm-top {
   animation: slideInFromTop 1s ease-out forwards;
 }
+
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.hover\:bg-gradient-to-l:hover + span {
+  animation: moveGradient 3s linear infinite;
+}

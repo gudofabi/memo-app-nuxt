@@ -7,16 +7,13 @@
 
 body,
 html {
-  font-family: "Quicksand";
-  font-size: 16px;
-  scroll-behavior: smooth;
-  transition: all 3s ease-in-out;
+  @apply text-[16px] font-quicksand scroll-smooth transition-all ease-in-out;
 }
 
 h1,
 h2,
 h3 {
-  font-family: "SF Compact";
+  @apply font-sf-pro;
 }
 
 .container {
