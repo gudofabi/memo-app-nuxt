@@ -70,7 +70,7 @@
         <li
           v-for="(item, index) in data_process"
           :key="index"
-          class="flex mb-7 cursor-pointer scale-100 hover:scale-105 hover:border hover:rounded-2xl hover:p-4 hover:pt-4 hover:pb-6 hover:shadow-md transition-all ease-in-out duration-300"
+          class="flex mb-7 cursor-pointer scale-100 hover:scale-105 hover:rounded-2xl hover:p-4 hover:pt-4 hover:pb-6 hover:shadow-md hover:bg-white transition-all ease-in-out duration-300"
           @mouseover="playGif(index)"
           @mouseleave="pauseGif(index)"
         >

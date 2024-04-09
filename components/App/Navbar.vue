@@ -12,7 +12,7 @@
     <nav class="flex align-center list-none pt-2">
       <li
         class="px-4 text-primary hover:text-secondary"
-        :class="{ 'text-secondary': $route.path === '/login' }"
+        :class="{ 'text-secondary': $route.path === '#how-it-works' }"
       >
         <NuxtLink href="/#how-it-works" class="font-bold"
           >How it works</NuxtLink
