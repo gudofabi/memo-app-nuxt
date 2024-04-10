@@ -1,12 +1,14 @@
 <template>
   <div
-    class="container mx-auto relative min-h-[500px] flex justify-between items-center"
+    class="container mx-auto relative min-h-[400px] lg:min-h-[600px] flex justify-between items-center"
   >
-    <div class="w-[600px]">
+    <div
+      class="h-full text-center md:text-left w-full md:w-[450px] lg:w-[600px]"
+    >
       <h1
-        class="text-primary font-bold text-[56px] leading-tight mb-4 bg-gradient-to-r from-primary via-secondary to-primary-2 text-transparent bg-clip-text hover:"
+        class="text-primary font-bold text-5xl md:text-4xl lg:text-[56px] md:leading-tight mb-4 bg-gradient-to-r from-primary via-secondary to-primary-2 text-transparent bg-clip-text"
       >
-        Helping people to <br />
+        Helping people to <br class="hidden lg:block" />
         analyze their
         <span class="font-bold">finances</span>.
       </h1>
@@ -16,13 +18,13 @@
       </p>
     </div>
     <div
-      class="absolute right-0 -bottom-[45px] w-[338px] cursor-pointer"
+      class="hidden md:block absolute right-0 md:-bottom-[45px] md:w-[268px] lg:w-[338px] h-auto cursor-pointer"
       @click="playCash()"
     >
       <img
         :class="{ 'slide-in-frm-right': data_isImageVisible }"
         src="/img/header-img.svg"
-        class="w-auto h-auto opacity-0"
+        class="w-full h-auto opacity-0"
         alt="Money floating"
       />
       <audio ref="refMoneySound">
@@ -34,7 +36,7 @@
   <!-- How it works -->
   <div
     id="how-it-works"
-    class="container mx-auto flex relative h-[850px] pb-20 mb-28"
+    class="container mx-auto flex flex-col md:flex-row relative md:h-[850px] pb-20 mb-28"
   >
     <div
       :style="{ top: data_floatingManPosition + 'px' }"
@@ -46,7 +48,10 @@
         class="w-full h-full object-cover"
       />
     </div>
-    <div id="description" class="w-1/2 flex items-center justify-center">
+    <div
+      id="description"
+      class="w-full md:w-1/2 flex items-center justify-center"
+    >
       <div
         class="w-[256px] h-auto bg-primary text-white rounded-3xl pl-5 pr-8 py-12 shadow-3xl flip-card"
       >
@@ -65,7 +70,7 @@
       </div>
     </div>
 
-    <div id="process" class="w-1/2 flex justify-end items-end">
+    <div id="process" class="w-full md:w-1/2 flex justify-end items-end">
       <ul>
         <li
           v-for="(item, index) in data_process"
@@ -102,13 +107,16 @@
     </div>
   </div>
   <!-- Creator -->
-  <div id="creator" class="bg-primary text-white text-center pt-28 pb-3">
+  <div id="creator" class="bg-primary text-white text-center pt-28 pb-3 hidden">
     <div class="container mx-auto relative">
       <img src="/img/chart.svg" alt="" class="absolute right-0 -top-[320px]" />
       <h3 class="text-4xl pb-16 font-quicksand tracking-wider">
         Meet the handsome creator...
       </h3>
-      <div id="about-me" class="relative mx-auto w-[900px] h-auto mb-40">
+      <div
+        id="about-me"
+        class="relative mx-auto w-full md:w-[900px] h-auto mb-40"
+      >
         <div
           @click="playPew()"
           class="mx-auto w-[70px] scale-100 hover:scale-110 h-[70px] border-2 border-white rounded-full shadow-3xl relative z-10 mb-4 ease-in-out cursor-pointer"
@@ -118,7 +126,9 @@
             <source src="/sounds/wow-naman.mp3" type="audio/mpeg" />
           </audio>
         </div>
-        <div class="text-black z-10 relative text-sm w-[640px] mx-auto">
+        <div
+          class="text-black z-10 relative text-sm w-full md:w-[640px] mx-auto"
+        >
           <p class="font-sf-compact font-medium text-primary text-base mb-2">
             Gudo Fabi
           </p>
@@ -134,7 +144,7 @@
         <img
           src="/img/paper.png"
           alt=""
-          class="absolute w-full h-[300px] top-0 z-0 object-contain"
+          class="absolute hidden md:block w-full h-[300px] top-0 z-0 object-contain"
         />
       </div>
       <div class="footer w-full">

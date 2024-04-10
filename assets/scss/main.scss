@@ -17,9 +17,7 @@ h3 {
 }
 
 .container {
-  @media (min-width: 1280px) {
-    max-width: 1000px;
-  }
+  @apply w-full md:w-[90%] xl:w-[1000px] px-5 md:px-0;
 }
 
 .kp-btn {
