@@ -8,9 +8,7 @@ export default defineNuxtConfig({
           href: "https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap",
         },
       ],
-      script: [
-        { src: 'https://unpkg.com/@phosphor-icons/web' }
-      ]
+      script: [{ src: "https://unpkg.com/@phosphor-icons/web" }],
     },
   },
   modules: ["@pinia/nuxt"],
@@ -24,5 +22,8 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
+  },
+  devServer: {
+    port: 8000,
   },
 });
