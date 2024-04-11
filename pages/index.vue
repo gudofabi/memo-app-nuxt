@@ -1,9 +1,9 @@
 <template>
   <div
-    class="container mx-auto relative min-h-[400px] lg:min-h-[600px] flex justify-between items-center"
+    class="container mx-auto relative min-h-full md:min-h-[500px] flex flex-col md:flex-row justify-between items-center"
   >
     <div
-      class="h-full text-center md:text-left w-full md:w-[450px] lg:w-[600px]"
+      class="h-full text-center md:text-left w-full md:w-[450px] lg:w-[600px] pt-32 pb-10 md:py-0"
     >
       <h1
         class="text-primary font-bold text-5xl md:text-4xl lg:text-[56px] md:leading-tight mb-4 bg-gradient-to-r from-primary via-secondary to-primary-2 text-transparent bg-clip-text"
@@ -18,14 +18,19 @@
       </p>
     </div>
     <div
-      class="hidden md:block absolute right-0 md:-bottom-[45px] md:w-[268px] lg:w-[338px] h-auto cursor-pointer"
+      class="md:absolute right-0 md:-bottom-[45px] w-full md:w-[268px] lg:w-[338px] h-auto cursor-pointer z-30"
       @click="playCash()"
     >
       <img
         :class="{ 'slide-in-frm-right': data_isImageVisible }"
         src="/img/header-img.svg"
-        class="w-full h-auto opacity-0"
+        class="w-full h-auto opacity-0 hidden md:block"
         alt="Money floating"
+      />
+      <img
+        src="/img/yoga.png"
+        class="w-[200px] mx-auto h-auto block md:hidden"
+        alt="Yoga"
       />
       <audio ref="refMoneySound">
         <source src="/sounds/money.mp3" type="audio/mpeg" />
@@ -40,7 +45,7 @@
   >
     <div
       :style="{ top: data_floatingManPosition + 'px' }"
-      class="w-[214px] lg:w-[250px] h-[264px] lg:h-[300px] absolute -top-[25px] -left-[50px]"
+      class="w-[214px] lg:w-[250px] h-[264px] lg:h-[300px] absolute -top-[25px] -left-[50px] hidden md:block"
     >
       <img
         src="/img/floating-man.svg"
@@ -50,10 +55,10 @@
     </div>
     <div
       id="description"
-      class="w-full md:w-1/2 flex items-center justify-center"
+      class="w-full md:w-1/2 flex items-center justify-center -mt-10"
     >
       <div
-        class="w-[256px] h-auto bg-primary text-white rounded-3xl pl-5 pr-8 py-12 shadow-3xl flip-card"
+        class="w-[256px] h-auto bg-primary text-white rounded-3xl pl-5 pr-8 py-12 shadow-3xl"
       >
         <h2 class="text-3xl tracking-wide leading-none mb-4">
           How it<br />
@@ -70,12 +75,15 @@
       </div>
     </div>
 
-    <div id="process" class="w-full md:w-1/2 flex justify-end items-end">
+    <div
+      id="process"
+      class="w-full md:w-1/2 flex justify-end items-end pt-16 pb-40 md:py-0"
+    >
       <ul>
         <li
           v-for="(item, index) in data_process"
           :key="index"
-          class="flex mb-7 cursor-pointer scale-100 hover:scale-105 hover:rounded-2xl hover:p-4 hover:pt-4 hover:pb-6 hover:shadow-md hover:bg-white transition-all ease-in-out duration-300"
+          class="flex mb-7 cursor-pointer scale-100 hover:scale-105 hover:rounded-2xl hover:px-2 hover:md:px-4 hover:pt-4 hover:md:pt-4 hover:pb-6 hover:md:pb-6 hover:shadow-md hover:bg-white transition-all ease-in-out duration-300"
           @mouseover="playGif(index)"
           @mouseleave="pauseGif(index)"
         >
@@ -94,10 +102,12 @@
             />
           </div>
           <div class="w-[80%]">
-            <h4 class="font-bold text-lg mb-2 text-primary">
+            <h4 class="font-bold text-base md:text-lg mb-2 text-primary">
               {{ item.title }}
             </h4>
-            <p class="text-base text-black tracking-normal">{{ item.text }}</p>
+            <p class="text-sm md:text-base text-black tracking-normal">
+              {{ item.text }}
+            </p>
           </div>
         </li>
       </ul>
@@ -107,19 +117,28 @@
     </div>
   </div>
   <!-- Creator -->
-  <div id="creator" class="bg-primary text-white text-center pt-28 pb-3 hidden">
+  <div
+    id="creator"
+    class="bg-primary text-white text-center pt-20 md:pt-28 pb-3 overflow-hidden md:overflow-visible"
+  >
     <div class="container mx-auto relative">
-      <img src="/img/chart.svg" alt="" class="absolute right-0 -top-[320px]" />
-      <h3 class="text-4xl pb-16 font-quicksand tracking-wider">
+      <img
+        src="/img/chart.svg"
+        alt=""
+        class="absolute right-0 -top-[320px] hidden md:block"
+      />
+      <h3
+        class="text-2xl md:text-4xl pb-12 md:pb-16 font-quicksand tracking-wider"
+      >
         Meet the handsome creator...
       </h3>
       <div
         id="about-me"
-        class="relative mx-auto w-full md:w-[900px] h-auto mb-40"
+        class="relative mx-auto w-full lg:w-[900px] h-auto mb-32 lg:mb-40"
       >
         <div
           @click="playPew()"
-          class="mx-auto w-[70px] scale-100 hover:scale-110 h-[70px] border-2 border-white rounded-full shadow-3xl relative z-10 mb-4 ease-in-out cursor-pointer"
+          class="mx-auto w-[70px] scale-100 hover:scale-110 h-[70px] border-2 border-white rounded-full shadow-3xl relative z-10 mb-2 lg:mb-4 ease-in-out cursor-pointer"
         >
           <img src="/img/iroh.png" alt="" class="w-full h-full absolute" />
           <audio ref="refAudioSound">
@@ -127,12 +146,12 @@
           </audio>
         </div>
         <div
-          class="text-black z-10 relative text-sm w-full md:w-[640px] mx-auto"
+          class="text-black z-10 relative text-sm w-full sm:w-[500px] lg:w-[640px] mx-auto"
         >
           <p class="font-sf-compact font-medium text-primary text-base mb-2">
             Gudo Fabi
           </p>
-          <p class="text-base">
+          <p class="text-sm lg:text-base">
             "I built this app to tackle my own budgeting and expense tracking
             challenges, making it simpler for others with the same issues. It
             goes beyond mere tracking, automatically adjusting your budget based
@@ -144,7 +163,7 @@
         <img
           src="/img/paper.png"
           alt=""
-          class="absolute hidden md:block w-full h-[300px] top-0 z-0 object-contain"
+          class="absolute max-w-[1300px] sm:max-w-[750px] md:max-w-full lg:w-full h-[350px] md:h-[317px] xl:h-[300px] -left-52 sm:-left-16 md:left-0 top-0 sm:-top-7 md:-top-2 lg:top-0 z-0 object-contain"
         />
       </div>
       <div class="footer w-full">

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container flex justify-between align-item-center w-full mx-auto py-3 bg-opacity-70 bg-white"
+    class="container flex justify-between align-item-center w-full mx-auto py-3"
   >
     <div>
       <NuxtLink
@@ -63,9 +63,20 @@
   </div>
 </template>
 <script setup lang="ts">
+const route = useRoute();
 const isSideNavOpen = ref(false);
 
 const toggleSideNav = () => {
   isSideNavOpen.value = !isSideNavOpen.value;
 };
+
+watch(
+  () => route.path,
+  (newPath) => {
+    // If the side navigation is open, close it
+    if (newPath) {
+      isSideNavOpen.value = false;
+    }
+  }
+);
 </script>
