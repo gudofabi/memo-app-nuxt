@@ -1,7 +1,9 @@
 <template>
-  <div class="2xl:fixed w-full flex items-center justify-center h-screen">
+  <div
+    class="xl:fixed w-full flex items-center justify-center xl:h-screen py-24 xl:pt-0"
+  >
     <div
-      class="rounded-xl bg-white px-6 sm:px-8 py-8 sm:py-10 shadow-4xl w-[90%] sm:w-96 text-center 2xl:-mt-[300px]"
+      class="rounded-xl bg-white px-6 sm:px-8 py-8 sm:py-10 shadow-4xl w-[90%] sm:w-96 text-center xl:-mt-[300px]"
     >
       <h2 class="text-2xl sm:text-3xl mb-4">Register</h2>
       <p class="text-base mb-8 text-gray-500 leading-5">
