@@ -10,16 +10,41 @@
         Hello friend, I’m Kupown - expense tracker application. Login and
         explore now!
       </p>
-      <input type="text" class="kp-input mb-6" placeholder="Username" />
-      <input type="password" class="kp-input mb-6" placeholder="Password" />
+      <input
+        type="text"
+        class="kp-input mb-6"
+        placeholder="Username"
+        v-model="data_form.username"
+      />
+      <input
+        type="password"
+        class="kp-input mb-6"
+        placeholder="Password"
+        v-model="data_form.password"
+      />
       <div class="text-right">
         <p
           class="mb-3 text-base font-semibold hover:text-secondary text-primary"
         >
           <NuxtLink href="/forgot-password" class="">Forgot Password?</NuxtLink>
         </p>
-        <button class="kp-btn text-primary">Login</button>
+        <button class="kp-btn text-primary" @click="func_login">Login</button>
       </div>
     </div>
   </div>
 </template>
+<script setup lang="ts">
+/**** Auth Store */
+const authStore = useAuthStore();
+
+const data_form = reactive({
+  username: "",
+  password: "",
+});
+
+/*** Functions */
+const func_login = () => {
+  console.log(data_form);
+  authStore.login(data_form);
+};
+</script>

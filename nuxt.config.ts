@@ -8,7 +8,7 @@ export default defineNuxtConfig({
           href: "https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap",
         },
       ],
-      script: [{ src: "https://unpkg.com/@phosphor-icons/web" }],
+      script: [{ src: "https://unpkg.com/@phosphor-icons/web@2.1.1" }],
     },
   },
   modules: ["@pinia/nuxt"],
@@ -25,5 +25,11 @@ export default defineNuxtConfig({
   },
   devServer: {
     port: 8000,
+  },
+  runtimeConfig: {
+    public: {
+      appTitle: process.env.VITE_APP_TITLE, // Use without VITE_ prefix
+      middlewareURL: process.env.VITE_MIDDLEWARE_URL,
+    },
   },
 });

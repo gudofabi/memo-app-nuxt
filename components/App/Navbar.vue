@@ -13,7 +13,7 @@
       <span class="ph ph-hamburger text-3xl text-center cursor-pointer"></span>
     </div>
     <nav
-      class="fixed md:relative md:flex top-0 bottom-0 right-0 align-center list-none pt-2 w-[50%] md:w-auto bg-white md:bg-transparent z-50 transition-all ease-in-out"
+      class="fixed md:relative md:flex top-0 bottom-0 right-0 align-center list-none pt-2 w-[180px] md:w-auto bg-white md:bg-transparent z-50 transition-all ease-in-out"
       :class="[
         isSideNavOpen
           ? 'translate-x-0 md:translate-x-full'
