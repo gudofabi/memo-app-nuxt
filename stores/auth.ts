@@ -26,8 +26,7 @@ export const useAuthStore = defineStore("authStore", () => {
         user.value = data.user;
         authenticated.value = "true";
         token.value = data.token;
-        console.log(res);
-        // window.location.href = "/bills";
+        window.location.href = "/bills";
       })
       .catch((err) => {
         message.value = err.response.data.message;

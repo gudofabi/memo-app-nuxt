@@ -1,6 +1,5 @@
 <template>
-  <h1>Bills</h1>
-  <!-- <div
+  <div
     v-if="getLoading"
     class="flex justify-center align-middle items-center text-center"
   >
@@ -61,26 +60,29 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script setup lang="ts">
-// const billsStore = useBillsStore();
-// const { getBills, getLoading } = storeToRefs(billsStore);
+import { formatCurrency, formatDate } from "~/utils/utils.ts";
+/*** Bills Store */
+const billsStore = useBillsStore();
+const { getBills, getLoading } = storeToRefs(billsStore);
 
-// onMounted(() => {
-//   billsStore.fetchList();
-// });
+onMounted(() => {
+  billsStore.fetchList();
+});
 
-// const func_formatCurrency = (value) => {
-//   return value;
-// };
+const func_formatCurrency = (value: number | null | undefined) => {
+  return formatCurrency(value);
+};
 
-// const func_deleteBill = (value) => {
-//   return value;
-// };
+const func_deleteBill = (value) => {
+  return value;
+};
 
-// const func_formatDate = (value) => {
-//   return value;
-// };
+const func_formatDate = (date: any) => {
+  if (!date) return;
+  return formatDate(date);
+};
 </script>
