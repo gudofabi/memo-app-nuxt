@@ -59,12 +59,14 @@
           </ul>
         </div>
       </div>
+      <BillsForm />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { formatCurrency, formatDate } from "~/utils/utils.ts";
+const { $emitter } = useNuxtApp();
 /*** Bills Store */
 const billsStore = useBillsStore();
 const { getBills, getLoading } = storeToRefs(billsStore);
@@ -73,16 +75,36 @@ onMounted(() => {
   billsStore.fetchList();
 });
 
+/*** Functions */
+
 const func_formatCurrency = (value: number | null | undefined) => {
   return formatCurrency(value);
-};
-
-const func_deleteBill = (value) => {
-  return value;
 };
 
 const func_formatDate = (date: any) => {
   if (!date) return;
   return formatDate(date);
+};
+
+const func_deleteBill = (id: string) => {
+  billsStore
+    .destroy(id)
+    .then((res) => {
+      $emitter.emit("alert-notification", {
+        message: res?.data.message,
+        alertType: "success",
+        timeout: 3000,
+        show: true,
+      });
+      billsStore.fetchList();
+    })
+    .catch((err) => {
+      $emmiter.emit("alert-notification", {
+        message: err.response?.data.message,
+        alertType: "error",
+        timeout: 3000,
+        show: true,
+      });
+    });
 };
 </script>

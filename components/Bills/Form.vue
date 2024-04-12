@@ -26,7 +26,6 @@
           :enable-time-picker="false"
           :disabled-dates="comp_disablePrevDates"
           position="left"
-          class="kp-input"
         />
         <p v-if="data_errors" class="text-red-500 text-xs italic mt-2">
           {{ data_errors?.date?.message }}
@@ -53,6 +52,10 @@
 
 <script setup lang="ts">
 import VueDatePicker from "@vuepic/vue-datepicker";
+const { $emitter } = useNuxtApp();
+console.log($emitter);
+/*** Bills Store */
+const billsStore = useBillsStore();
 
 const data_errors = {};
 const data_message = {};
@@ -74,5 +77,34 @@ const comp_disablePrevDates = computed(() => {
   };
 });
 
-const func_addBill = () => {};
+const func_addBill = () => {
+  const params = {
+    ...data_form,
+    date: data_form.date ? formatDatePicker(data_form.date) : "",
+  };
+
+  billsStore
+    .create(params)
+    .then((res) => {
+      data_message.value = res?.data.message;
+      data_form.date = null;
+      data_form.salary = null;
+      $emitter.emit("alert-notification", {
+        message: res?.data.message,
+        alertType: "success",
+        timeout: 3000,
+        show: true,
+      });
+      billsStore.fetchList();
+    })
+    .catch((err) => {
+      console.log(err);
+      $emitter.emit("alert-notification", {
+        message: "Something went wrong.",
+        alertType: "error",
+        timeout: 3000,
+        show: true,
+      });
+    });
+};
 </script>

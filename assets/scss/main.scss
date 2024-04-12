@@ -61,3 +61,61 @@ h3 {
 .kp-input {
   @apply border-2 border-gray-400 focus:outline-none focus:border-primary px-3 w-full h-11;
 }
+
+// Date Picker
+.dp__input_wrap {
+  .dp__input {
+    @apply border-2 border-gray-400 focus:outline-none focus:border-primary px-3 w-full h-11;
+  }
+  .dp__input_icon {
+    right: 0;
+    inset-inline-end: 0;
+    inset-inline-start: unset;
+  }
+  .dp__clear_icon {
+    background-color: #fff;
+    inset-inline-end: 1%;
+  }
+  .dp__input_focus {
+    @apply border-primary;
+  }
+}
+
+.dp__outer_menu_wrap {
+  top: 120% !important;
+  .dp__arrow_top {
+    top: 0 !important;
+    bottom: 100% !important;
+    border-inline-end: 1px solid var(--dp-menu-border-color) !important;
+    border-top: 1px solid var(--dp-menu-border-color) !important;
+    transform: translate(-50%, -50%) rotate(-45deg) !important;
+  }
+  .dp__instance_calendar .dp__menu_inner {
+    .dp__calendar {
+      .dp__today {
+        @apply border-secondary;
+        border-radius: 0px;
+      }
+      .dp__active_date {
+        @apply bg-secondary;
+        border-radius: 0px;
+      }
+    }
+  }
+  .dp__action_row {
+    .dp__action_buttons {
+      .dp__action_select {
+        @apply bg-secondary;
+      }
+    }
+  }
+}
+
+.dp__arrow_bottom {
+  border-inline-end: 1px solid var(--dp-menu-border-color) !important;
+  border-bottom: transparent !important;
+  border-top: 1px solid var(--dp-menu-border-color) !important;
+  transform: translate(-50%, -50%) rotate(-45deg) !important;
+  top: 0 !important;
+  bottom: 100% !important;
+}

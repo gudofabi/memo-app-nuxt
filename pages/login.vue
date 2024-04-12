@@ -44,7 +44,6 @@ const data_form = reactive({
 
 /*** Functions */
 const func_login = () => {
-  console.log(data_form);
   authStore.login(data_form);
 };
 </script>

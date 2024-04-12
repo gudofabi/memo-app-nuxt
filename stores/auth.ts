@@ -14,6 +14,15 @@ export const useAuthStore = defineStore("authStore", () => {
   const errors = ref({});
   const message = ref("");
 
+  /*** Computed */
+  const isAuthenticated = computed(() => {
+    return authenticated.value ?? false;
+  });
+
+  const getUser = computed(() => {
+    return user.value ?? {};
+  });
+
   /*** Actions */
   const login = ($params: any) => {
     loading.value = true;
@@ -34,5 +43,5 @@ export const useAuthStore = defineStore("authStore", () => {
       .finally(() => (loading.value = false));
   };
 
-  return { login };
+  return { login, isAuthenticated, getUser };
 });

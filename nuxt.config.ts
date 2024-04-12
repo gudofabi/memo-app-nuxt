@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   alias: {
     assets: "/<rootDir>/assets",
   },
-  css: ["~/assets/scss/main.scss"],
+  css: ["~/assets/scss/main.scss", "@vuepic/vue-datepicker/dist/main.css"],
   postcss: {
     plugins: {
       tailwindcss: {},
