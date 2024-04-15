@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white shadow sm:rounded-b-md p-4">
     <h2 class="text-md font-medium text-gray-900 mb-5">Add New Bill</h2>
-    <div class="grid grid-cols-1 gap-4">
+    <div class="grid grid-cols-1">
       <div
         v-if="data_isSuccess"
         class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
@@ -18,31 +18,24 @@
         <strong class="font-bold">Error! </strong>
         <span class="block sm:inline">{{ data_message }}</span>
       </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Date</label>
-        <VueDatePicker
-          v-model="data_form.date"
-          :text-inpu="data_dateFormat"
-          :enable-time-picker="false"
-          :disabled-dates="comp_disablePrevDates"
-          position="left"
-        />
-        <p v-if="data_errors" class="text-red-500 text-xs italic mt-2">
-          {{ data_errors?.date?.message }}
-        </p>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Salary</label>
-        <input
-          v-model="data_form.salary"
-          type="number"
-          placeholder="Salary"
-          class="kp-input"
-        />
-        <p v-if="data_errors" class="text-red-500 text-xs italic mt-2">
-          {{ data_errors?.salary?.message }}
-        </p>
-      </div>
+      <FormDateField
+        v-model="data_form.date"
+        :disable-dates="comp_disablePrevDates"
+        v-bind="{
+          label: 'Salary',
+          placeholder: 'When salary received',
+        }"
+        :validation="$v.date"
+      />
+      <FormInputField
+        v-model="data_form.salary"
+        v-bind="{
+          label: 'Salary',
+          placeholder: 'Ex: 40000',
+          type: 'number',
+        }"
+        :validation="$v.salary"
+      />
       <div class="text-right">
         <button @click="func_addBill" class="kp-btn">Create Bill</button>
       </div>
@@ -51,9 +44,9 @@
 </template>
 
 <script setup lang="ts">
-import VueDatePicker from "@vuepic/vue-datepicker";
+import { useVuelidate } from "@vuelidate/core";
+import { requiredMessage } from "~/utils/validators";
 const { $emitter } = useNuxtApp();
-console.log($emitter);
 /*** Bills Store */
 const billsStore = useBillsStore();
 
@@ -65,9 +58,6 @@ const data_form = reactive({
   date: null,
   salary: null,
 });
-const data_dateFormat = {
-  format: "yyyy-MM-dd",
-};
 
 const comp_disablePrevDates = computed(() => {
   return (date: any) => {
@@ -77,34 +67,49 @@ const comp_disablePrevDates = computed(() => {
   };
 });
 
+const rules = computed(() => ({
+  date: {
+    required: requiredMessage(),
+  },
+  salary: {
+    required: requiredMessage(),
+  },
+}));
+
+const $v = useVuelidate(rules, data_form);
+
+/*** Funtions */
 const func_addBill = () => {
   const params = {
     ...data_form,
     date: data_form.date ? formatDatePicker(data_form.date) : "",
   };
 
-  billsStore
-    .create(params)
-    .then((res) => {
-      data_message.value = res?.data.message;
-      data_form.date = null;
-      data_form.salary = null;
-      $emitter.emit("alert-notification", {
-        message: res?.data.message,
-        alertType: "success",
-        timeout: 3000,
-        show: true,
+  $v.value.$validate();
+  if (!$v.value.$error) {
+    billsStore
+      .create(params)
+      .then((res) => {
+        data_message.value = res?.data.message;
+        data_form.date = null;
+        data_form.salary = null;
+        $emitter.emit("alert-notification", {
+          message: res?.data.message,
+          alertType: "success",
+          timeout: 3000,
+          show: true,
+        });
+        billsStore.fetchList();
+      })
+      .catch((err) => {
+        console.log(err);
+        $emitter.emit("alert-notification", {
+          message: "Something went wrong.",
+          alertType: "error",
+          timeout: 3000,
+          show: true,
+        });
       });
-      billsStore.fetchList();
-    })
-    .catch((err) => {
-      console.log(err);
-      $emitter.emit("alert-notification", {
-        message: "Something went wrong.",
-        alertType: "error",
-        timeout: 3000,
-        show: true,
-      });
-    });
+  }
 };
 </script>

@@ -2,7 +2,7 @@
   <transition name="fade" @enter="enter" @leave="leave">
     <div
       v-if="data_show"
-      class="fixed bottom-4 right-4 md:bottom-8 md:right-8 flex items-center p-4 mb-4 w-full max-w-sm text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+      class="fixed bottom-4 right-4 md:bottom-8 md:right-8 flex items-center p-4 mb-4 w-full max-w-sm text-gray-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 z-50"
       :class="{
         'bg-green-100  dark:bg-green-200': data_alertType === 'success',
         'bg-red-100  dark:bg-red-200': data_alertType === 'error',

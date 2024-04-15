@@ -10,17 +10,21 @@
         Hello friend, I’m Kupown - expense tracker application. Login and
         explore now!
       </p>
-      <input
-        type="text"
-        class="kp-input mb-6"
-        placeholder="Username"
+      <FormInputField
         v-model="data_form.username"
+        v-bind="{
+          placeholder: 'Username',
+          type: 'text',
+        }"
+        :validation="$v.username"
       />
-      <input
-        type="password"
-        class="kp-input mb-6"
-        placeholder="Password"
+      <FormInputField
         v-model="data_form.password"
+        v-bind="{
+          placeholder: 'Password',
+          type: 'password',
+        }"
+        :validation="$v.password"
       />
       <div class="text-right">
         <p
@@ -34,6 +38,9 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useVuelidate } from "@vuelidate/core";
+import { requiredMessage } from "~/utils/validators";
+
 /**** Auth Store */
 const authStore = useAuthStore();
 
@@ -42,8 +49,22 @@ const data_form = reactive({
   password: "",
 });
 
+const rules = computed(() => ({
+  username: {
+    required: requiredMessage(),
+  },
+  password: {
+    required: requiredMessage(),
+  },
+}));
+
+const $v = useVuelidate(rules, data_form);
+
 /*** Functions */
 const func_login = () => {
-  authStore.login(data_form);
+  $v.value.$validate();
+  if (!$v.value.$error) {
+    authStore.login(data_form);
+  }
 };
 </script>

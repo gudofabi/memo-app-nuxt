@@ -12,12 +12,18 @@
         <ExpenseList :bill-data="getBill" @change="func_fetchBillById" />
         <!-- Expense Form -->
         <ExpenseForm
+          v-if="getBill?.status === 'Active'"
           :bill-id="($route.params?.id as string)"
           @save-expense="func_fetchBillById"
         />
       </div>
       <div class="w-1/2">
         <!-- Record Card -->
+        <ExpenseRecordCard
+          :bill-data="getBill || {}"
+          :bill-id="($route.params?.id as string)"
+          @settle-bill="func_fetchBillById"
+        />
       </div>
     </div>
   </div>

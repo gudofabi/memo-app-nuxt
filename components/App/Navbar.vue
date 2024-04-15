@@ -70,29 +70,32 @@
         v-if="isAuthenticated"
       >
         <NuxtLink
-          href="/settings"
+          href="/settings/profile"
           :class="{ 'text-secondary': $route.path === '/register' }"
           class="font-bold"
           >Settings</NuxtLink
         >
       </li>
-      <li class="px-4 mb-2 md:mb-0 flex items-center" v-if="isAuthenticated">
+      <li
+        class="pl-2 pr-4 mb-2 md:mb-0 flex items-center border-gray-100 bg-gray-200 rounded-full py-1"
+        v-if="isAuthenticated"
+      >
         <img
           src="https://gravatar.com/avatar/99d3a27c307cdaf6b834e1705f2ada24?s=400&d=robohash&r=x"
           alt="User Avatar"
-          class="h-10 w-10 rounded-full border-4 mr-2 border-indigo-500"
+          class="h-10 w-10 rounded-full border-4 mr-2 border-gray-300"
         />
         <!-- User Avatar -->
         <span class="font-medium capitalize"
           >{{ getUser.username ?? "--" }}
         </span>
         <!-- User Name -->
-        <a
-          href="#"
-          @click="func_logout"
-          class="text-primary hover:text-secondary text-nowrap font-bold ml-4"
-          >Logout</a
-        >
+      </li>
+      <li
+        class="px-4 text-primary hover:text-secondary text-nowrap mb-2 md:mb-0"
+        v-if="isAuthenticated"
+      >
+        <a href="#" class="font-bold" @click="func_logout">Logout</a>
       </li>
     </ul>
     <div
@@ -108,7 +111,6 @@ const { isAuthenticated, getUser } = useAuthStore();
 
 const route = useRoute();
 const isSideNavOpen = ref(false);
-
 watch(
   () => route.path,
   (newPath) => {

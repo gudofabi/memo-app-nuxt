@@ -9,8 +9,8 @@ export const auth = (axios: AxiosInstance) => ({
     return axios.post("/auth/register", params);
   },
 
-  async vetify(token: string): Promise<any> {
-    return axios.get(`/auth/vetify/${token}`);
+  async verify(token: string): Promise<any> {
+    return axios.get(`/auth/verify/${token}`);
   },
 
   async forgotPassword(params: any): Promise<any> {

@@ -65,7 +65,7 @@ h3 {
 // Date Picker
 .dp__input_wrap {
   .dp__input {
-    @apply border-2 border-gray-400 focus:outline-none focus:border-primary px-3 w-full h-11;
+    @apply border-2 border-gray-400 focus:outline-none focus:border-primary px-3 w-full h-11 rounded-none;
   }
   .dp__input_icon {
     right: 0;

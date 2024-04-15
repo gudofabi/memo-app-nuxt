@@ -17,6 +17,10 @@ export const useBudgetRuleStore = defineStore("budgetRuleStore", () => {
     return budgetRuleCategories.value ?? [];
   });
 
+  const getLoading = computed(() => {
+    return loading.value ?? false;
+  });
+
   /*** Actions */
   const fetchList = async () => {
     loading.value = true;
@@ -42,6 +46,8 @@ export const useBudgetRuleStore = defineStore("budgetRuleStore", () => {
 
   return {
     getBudgetRuleCategories,
+    getLoading,
+    hasFetchedInitialCategories,
     fetchList,
     create,
     destroy,

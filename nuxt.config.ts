@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     },
   },
   modules: ["@pinia/nuxt"],
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   alias: {
     assets: "/<rootDir>/assets",
   },

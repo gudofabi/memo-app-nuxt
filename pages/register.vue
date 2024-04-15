@@ -10,12 +10,86 @@
         Hello friend, I’m Kupown - expense tracker application. Register and
         explore now!
       </p>
-      <input type="text" class="kp-input mb-6" placeholder="Username" />
-      <input type="email" class="kp-input mb-6" placeholder="Email" />
-      <input type="password" class="kp-input mb-6" placeholder="Password" />
+      <FormInputField
+        v-model="data_form.username"
+        v-bind="{
+          placeholder: 'Username',
+          type: 'text',
+        }"
+        :validation="$v.username"
+      />
+      <FormInputField
+        v-model="data_form.email"
+        v-bind="{
+          placeholder: 'Email',
+          type: 'email',
+        }"
+        :validation="$v.email"
+      />
+      <FormInputField
+        v-model="data_form.password"
+        v-bind="{
+          placeholder: 'Password',
+          type: 'password',
+        }"
+        :validation="$v.password"
+      />
       <div class="text-right">
-        <button class="kp-btn text-primary">Register</button>
+        <button class="kp-btn text-primary" @click="func_register">
+          Register
+        </button>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useVuelidate } from "@vuelidate/core";
+import { email, maxLength } from "@vuelidate/validators";
+import {
+  requiredMessage,
+  passwordMinLength,
+  containsUppercase,
+  containsLowercase,
+  containsNumber,
+  containsSpecialChar,
+} from "~/utils/validators";
+
+/*** Auth Store */
+const authStore = useAuthStore();
+
+const data_form = reactive({
+  username: "",
+  email: "",
+  password: "",
+});
+
+const rules = computed(() => ({
+  username: {
+    required: requiredMessage(),
+  },
+  email: {
+    required: requiredMessage(),
+    email,
+  },
+  password: {
+    required: requiredMessage(),
+    minLength: passwordMinLength(8),
+    containsUppercase,
+    containsLowercase,
+    containsNumber,
+    containsSpecialChar,
+    maxLength: maxLength(12),
+  },
+}));
+
+const $v = useVuelidate(rules, data_form);
+
+/*** Functions */
+const func_register = () => {
+  $v.value.$validate();
+  if (!$v.value.$error) {
+    authStore.register(data_form);
+  }
+};
+</script>

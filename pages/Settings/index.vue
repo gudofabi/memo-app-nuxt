@@ -1,3 +1,4 @@
 <template>
-  <h1>Settings</h1>
+  <NuxtPage />
 </template>
+<script setup lang="ts"></script>
