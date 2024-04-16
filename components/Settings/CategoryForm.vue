@@ -84,6 +84,7 @@ const func_saveCategory = () => {
           timeout: 3000,
           show: true,
         });
+
         emits("save", true);
       })
       .catch((err) => {

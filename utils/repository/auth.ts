@@ -1,4 +1,5 @@
 import type { AxiosInstance } from "axios";
+import type { PasswordType, ProfileType } from "~/types/user";
 
 export const auth = (axios: AxiosInstance) => ({
   async login(params: any): Promise<any> {
@@ -14,10 +15,18 @@ export const auth = (axios: AxiosInstance) => ({
   },
 
   async forgotPassword(params: any): Promise<any> {
-    return axios.get(`/auth/forgot-password`, params);
+    return axios.post(`/auth/forgot-password`, params);
   },
 
   async resetPassword(token: string, params: any): Promise<any> {
-    return axios.get(`/auth/reset-password/${token}`, params);
+    return axios.post(`/auth/reset-password/${token}`, params);
+  },
+
+  async updateProfile(params: ProfileType) {
+    return axios.patch("/settings/profile", params);
+  },
+
+  async changePassword(params: PasswordType) {
+    return axios.patch("/settings/change-password", params);
   },
 });

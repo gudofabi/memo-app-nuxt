@@ -1,5 +1,5 @@
 <template>
-  <div class="relative mb-7">
+  <div class="relative mb-7 text-left">
     <label
       v-if="$attrs.label"
       class="block text-sm font-medium text-gray-700 mb-1"
@@ -53,6 +53,13 @@ const props = defineProps<{
 
 const data_internalValue = ref(props.modelValue);
 const data_showPassword = ref(false);
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    data_internalValue.value = value;
+  }
+);
 
 const comp_validationErrors = computed(() => {
   return props.validation && props.validation.$error

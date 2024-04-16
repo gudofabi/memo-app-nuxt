@@ -104,8 +104,7 @@ const func_addExpense = () => {
       .create(props.billId, data_form)
       .then((res) => {
         data_message.value = res?.data.message;
-        data_form.amount = null;
-        data_form.description = "";
+
         data_errors.value = {};
         $emitter.emit("alert-notification", {
           message: res.data.message,
@@ -123,6 +122,10 @@ const func_addExpense = () => {
           timeout: 3000,
           show: true,
         });
+      })
+      .finally(() => {
+        data_form.amount = null;
+        data_form.description = "";
       });
   }
 };

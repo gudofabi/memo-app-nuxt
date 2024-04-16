@@ -1,11 +1,18 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const { isAuthenticated } = useAuthStore();
   // List of public routes that don't require authentication
-  const publicPaths = ["/", "/register", "/login"];
+  const publicPaths = [
+    "/",
+    "/register",
+    "/login",
+    "/forgot-password",
+    "/verify",
+    "/reset-password",
+  ];
 
   // If the user is authenticated and trying to access the login or register page,
   // redirect them to the home page.
-  if (isAuthenticated && (to.path === "/login" || to.path === "/register")) {
+  if (isAuthenticated && (to.path === "login" || to.path === "register")) {
     return navigateTo("/");
   }
 

@@ -50,13 +50,13 @@ import {
   containsSpecialChar,
 } from "~/utils/validators";
 
+const authStore = useAuthStore();
+
 // Reactive state for form and password visibility
 const data_form = reactive({
   current_password: "",
   new_password: "",
 });
-const data_showCurrentPassword = ref(false);
-const data_showNewPassword = ref(false);
 
 const rules = computed(() => ({
   current_password: {
@@ -79,7 +79,10 @@ const $v = useVuelidate(rules, data_form);
 const func_changePassword = () => {
   $v.value.$validate();
   if (!$v.value.$error) {
-    console.log(data_form);
+    authStore.changePassword(data_form);
+    $v.value.$reset();
+    data_form.current_password = "";
+    data_form.new_password = "";
   }
 };
 </script>

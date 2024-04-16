@@ -37,6 +37,13 @@ const data_dateFormat = {
   format: "yyyy-MM-dd",
 };
 
+watch(
+  () => props.modelValue,
+  (value) => {
+    data_internalValue.value = value;
+  }
+);
+
 const comp_validationErrors = computed(() => {
   return props.validation && props.validation.$error
     ? props.validation?.$errors[0].$message

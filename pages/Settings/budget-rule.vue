@@ -41,7 +41,9 @@
 definePageMeta({
   layout: "settings",
 });
+const { $emitter } = useNuxtApp();
 
+/** Budget Rule Store */
 const budgetRuleStore = useBudgetRuleStore();
 const { getBudgetRuleCategories } = storeToRefs(budgetRuleStore);
 
@@ -51,9 +53,25 @@ onMounted(() => {
 
 // Methods
 const func_deleteCategory = (categoryId: string) => {
-  budgetRuleStore.destroy(categoryId).then((res) => {
-    budgetRuleStore.fetchList();
-  });
+  budgetRuleStore
+    .destroy(categoryId)
+    .then((res) => {
+      $emitter.emit("alert-notification", {
+        message: res?.data.message,
+        alertType: "success",
+        timeout: 3000,
+        show: true,
+      });
+      budgetRuleStore.fetchList();
+    })
+    .catch((err) => {
+      $emitter.emit("alert-notification", {
+        message: err.response?.data.message,
+        alertType: "error",
+        timeout: 3000,
+        show: true,
+      });
+    });
 };
 
 const func_saveCategory = (value: boolean) => {

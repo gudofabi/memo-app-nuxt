@@ -58,6 +58,11 @@ h3 {
   border-bottom: none;
 }
 
+.kp-btn-disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .kp-input {
   @apply border-2 border-gray-400 focus:outline-none focus:border-primary px-3 w-full h-11;
 }

@@ -1,10 +1,12 @@
 import type { AxiosInstance } from "axios";
 import { defineStore } from "pinia";
+import type { PasswordType, ProfileType } from "~/types/user";
 import { auth } from "~/utils/repository/auth";
 
 export const useAuthStore = defineStore("authStore", () => {
-  const { $axios } = useNuxtApp();
-  const authRepo = auth($axios as AxiosInstance);
+  const { $axios, $auth, $emitter } = useNuxtApp();
+  const regularRepo = auth($axios as AxiosInstance);
+  const authRepo = auth($auth as AxiosInstance);
 
   /*** State */
   const user = useCookie("user");
@@ -29,7 +31,7 @@ export const useAuthStore = defineStore("authStore", () => {
     loading.value = true;
     errors.value = {};
     message.value = "";
-    authRepo
+    regularRepo
       .login($params)
       .then((res: any) => {
         const data = res.data;
@@ -48,10 +50,16 @@ export const useAuthStore = defineStore("authStore", () => {
     loading.value = true;
     errors.value = {};
     message.value = "";
-    authRepo
+    regularRepo
       .register($params)
       .then((res: any) => {
         message.value = res.data.message;
+        $emitter.emit("alert-notification", {
+          message: res.data.message,
+          alertType: "success",
+          timeout: 3000,
+          show: true,
+        });
         setTimeout(() => {
           window.location.href = "/login";
           message.value = "";
@@ -67,7 +75,7 @@ export const useAuthStore = defineStore("authStore", () => {
     loading.value = true;
     errors.value = {};
     message.value = "";
-    authRepo
+    regularRepo
       .verify($token)
       .then((res: any) => {
         code.value = res.status;
@@ -81,14 +89,84 @@ export const useAuthStore = defineStore("authStore", () => {
   };
 
   const forgotPassword = ($params: any) => {
-    return authRepo.forgotPassword($params);
+    return regularRepo.forgotPassword($params);
   };
 
   const resetPassword = ($token: string, password: string) => {
     const $params = {
       password,
     };
-    return authRepo.resetPassword($token, $params);
+    return regularRepo.resetPassword($token, $params);
+  };
+
+  const updateProfile = (params: ProfileType) => {
+    loading.value = true;
+    message.value = "";
+    authRepo
+      .updateProfile(params)
+      .then((res: any) => {
+        // Assuming success statuses are 200 and 201 only
+        const isSuccess = res.status === 200 || res.status === 201;
+
+        // Emit a notification based on the response status
+        $emitter.emit("alert-notification", {
+          message: res.data.message,
+          alertType: isSuccess ? "success" : "error",
+          timeout: 3000,
+          show: true,
+        });
+
+        // Update session user only on success
+        if (isSuccess) {
+          user.value = res.data.user;
+        }
+      })
+      .catch((err: any) => {
+        const errorMessage =
+          err?.response?.data?.message || "An unexpected error occurred";
+
+        $emitter.emit("alert-notification", {
+          message: errorMessage,
+          alertType: "error",
+          timeout: 3000,
+          show: true,
+        });
+      });
+  };
+
+  const changePassword = (params: PasswordType) => {
+    loading.value = true;
+    message.value = "";
+    authRepo
+      .changePassword(params)
+      .then((res: any) => {
+        // Assuming success statuses are 200 and 201 only
+        const isSuccess = res.status === 200 || res.status === 201;
+
+        // Emit a notification based on the response status
+        $emitter.emit("alert-notification", {
+          message: res.data.message,
+          alertType: isSuccess ? "success" : "error",
+          timeout: 3000,
+          show: true,
+        });
+
+        // Update session user only on success
+        if (isSuccess) {
+          user.value = res.data.user;
+        }
+      })
+      .catch((err: any) => {
+        const errorMessage =
+          err?.response?.data?.message || "An unexpected error occurred";
+
+        $emitter.emit("alert-notification", {
+          message: errorMessage,
+          alertType: "error",
+          timeout: 3000,
+          show: true,
+        });
+      });
   };
 
   return {
@@ -97,6 +175,11 @@ export const useAuthStore = defineStore("authStore", () => {
     verify,
     forgotPassword,
     resetPassword,
+    updateProfile,
+    changePassword,
+    loading,
+    message,
+    code,
     isAuthenticated,
     getUser,
   };

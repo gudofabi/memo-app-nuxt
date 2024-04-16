@@ -38,14 +38,14 @@
 definePageMeta({
   layout: "settings",
 });
-
 import { useVuelidate } from "@vuelidate/core";
 import { email } from "@vuelidate/validators";
 import { requiredMessage } from "~/utils/validators";
 
+const authStore = useAuthStore();
+
 const data_form = reactive({
-  username: "",
-  email: "",
+  ...authStore.getUser,
 });
 
 const rules = computed(() => ({
@@ -58,12 +58,12 @@ const rules = computed(() => ({
   },
 }));
 
-const $v = useVuelidate(rules, data_form);
+const $v = useVuelidate(rules, data_form as any);
 
 const func_update = () => {
   $v.value.$validate();
   if (!$v.value.$error) {
-    console.log(data_form);
+    authStore.updateProfile(data_form as any);
   }
 };
 </script>

@@ -91,8 +91,7 @@ const func_addBill = () => {
       .create(params)
       .then((res) => {
         data_message.value = res?.data.message;
-        data_form.date = null;
-        data_form.salary = null;
+
         $emitter.emit("alert-notification", {
           message: res?.data.message,
           alertType: "success",
@@ -109,6 +108,10 @@ const func_addBill = () => {
           timeout: 3000,
           show: true,
         });
+      })
+      .finally(() => {
+        data_form.date = null;
+        data_form.salary = null;
       });
   }
 };
