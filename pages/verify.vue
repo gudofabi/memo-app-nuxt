@@ -11,7 +11,7 @@
       <template v-else>
         <h2
           class="text-xl mb-3"
-          :class="[authStore?.code === 400 ? 'text-red-600' : 'text-green-600']"
+          :class="[authStore?.code === 400 ? 'text-red-600' : 'text-primary']"
         >
           {{ authStore.message }}
         </h2>

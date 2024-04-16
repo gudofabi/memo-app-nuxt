@@ -12,6 +12,7 @@ export const useAuthStore = defineStore("authStore", () => {
   const user = useCookie("user");
   const token = useCookie("token");
   const authenticated = useCookie("authenticated");
+  const isVerify = useCookie("isVerify");
   const code = ref("");
   const loading = ref(false);
   const errors = ref({});
@@ -26,6 +27,10 @@ export const useAuthStore = defineStore("authStore", () => {
     return user.value ?? {};
   });
 
+  const getIsVerify = computed(() => {
+    return isVerify.value ?? false;
+  });
+
   /*** Actions */
   const login = ($params: any) => {
     loading.value = true;
@@ -36,6 +41,7 @@ export const useAuthStore = defineStore("authStore", () => {
       .then((res: any) => {
         const data = res.data;
         user.value = data.user;
+        isVerify.value = data.user.isVerified;
         authenticated.value = "true";
         token.value = data.token;
         window.location.href = "/bills";
@@ -182,5 +188,6 @@ export const useAuthStore = defineStore("authStore", () => {
     code,
     isAuthenticated,
     getUser,
+    getIsVerify,
   };
 });

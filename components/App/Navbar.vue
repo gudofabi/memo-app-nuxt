@@ -83,7 +83,8 @@
         <img
           src="https://gravatar.com/avatar/99d3a27c307cdaf6b834e1705f2ada24?s=400&d=robohash&r=x"
           alt="User Avatar"
-          class="h-10 w-10 rounded-full border-4 mr-2 border-gray-300"
+          class="h-10 w-10 rounded-full border-4 mr-2"
+          :class="getIsVerify ? 'border-green-400' : 'border-gray-300'"
         />
         <!-- User Avatar -->
         <span class="font-medium capitalize"
@@ -107,7 +108,7 @@
 </template>
 <script setup lang="ts">
 import { clearAllCookies } from "~/composables/useCookie";
-const { isAuthenticated, getUser } = useAuthStore();
+const { isAuthenticated, getUser, getIsVerify } = useAuthStore();
 
 const route = useRoute();
 const isSideNavOpen = ref(false);

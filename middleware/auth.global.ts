@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, getIsVerify } = useAuthStore();
   // List of public routes that don't require authentication
   const publicPaths = [
     "/",

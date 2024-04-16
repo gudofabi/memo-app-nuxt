@@ -1,4 +1,5 @@
 <template>
+  <SettingsVerifyAlert />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
@@ -28,7 +29,8 @@ const comp_showBudgetRuleModal = computed(() => {
     budgetRuleStore.getBudgetRuleCategories.length === 0 &&
     !budgetRuleStore.getLoading &&
     budgetRuleStore.hasFetchedInitialCategories &&
-    $route.name != "Settings-budget-rule"
+    $route.name != "Settings-budget-rule" &&
+    $route.name != "index"
   );
 });
 </script>

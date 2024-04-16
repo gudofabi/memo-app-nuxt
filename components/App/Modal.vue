@@ -4,7 +4,7 @@
       v-if="show"
       class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
     >
-      <div class="bg-white p-6 rounded-lg shadow-lg">
+      <div class="bg-white p-6 rounded-lg shadow-lg" :class="[width]">
         <slot name="header"></slot>
         <slot name="body"></slot>
         <slot name="footer"></slot>
@@ -17,6 +17,7 @@
 // Additional script logic if needed
 const props = defineProps<{
   show: boolean;
+  width?: string;
 }>();
 </script>
 
