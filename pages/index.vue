@@ -12,9 +12,9 @@
         analyze their
         <span class="font-bold">finances</span>.
       </h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum alias
-        animi assumenda, veniam error?
+      <p class="text-lg">
+        Empowering you with insights and tools to understand your spending,
+        savings, and overall financial health.
       </p>
     </div>
     <div
