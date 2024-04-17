@@ -35,6 +35,15 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: "Profile - Kupown",
+  meta: [
+    {
+      name: "description",
+      content: "Helping people to analyze their finances.",
+    },
+  ],
+});
 definePageMeta({
   layout: "settings",
 });

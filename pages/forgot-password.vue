@@ -1,7 +1,9 @@
 <template>
-  <div class="fixed w-full flex items-center justify-center h-screen">
+  <div
+    class="xl:fixed w-full flex items-center justify-center xl:h-screen py-24 xl:pt-0"
+  >
     <div
-      class="rounded-xl bg-white px-8 py-10 shadow-4xl w-96 text-center -mt-[300px]"
+      class="rounded-xl bg-white px-6 sm:px-8 py-8 sm:py-10 shadow-4xl w-[90%] sm:w-96 text-center xl:-mt-[300px]"
     >
       <h2 class="text-3xl mb-4">Forgot Password</h2>
       <p class="text-base mb-8 text-gray-500 leading-5">
@@ -41,6 +43,15 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: "Forgot Password - Kupown",
+  meta: [
+    {
+      name: "description",
+      content: "Helping people to analyze their finances.",
+    },
+  ],
+});
 const { $emitter } = useNuxtApp();
 import { useVuelidate } from "@vuelidate/core";
 import { email } from "@vuelidate/validators";

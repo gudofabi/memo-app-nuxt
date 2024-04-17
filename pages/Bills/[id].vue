@@ -29,8 +29,20 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { formatDate } from "~/utils/utils.ts";
+
 const billsStore = useBillsStore();
 const { getLoading, getBill } = storeToRefs(billsStore);
+
+useHead({
+  title: `${formatDate(getBill.value?.date)} - Kupown`,
+  meta: [
+    {
+      name: "description",
+      content: "You can see here all your created bills.",
+    },
+  ],
+});
 
 const $route = useRoute();
 

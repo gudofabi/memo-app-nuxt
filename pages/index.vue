@@ -185,6 +185,16 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: "Kupown | Helping people to analyze their finances.",
+  meta: [
+    {
+      name: "description",
+      content: "Helping people to analyze their finances.",
+    },
+  ],
+});
+
 const data_process = reactive([
   {
     title: "Create and Assign",

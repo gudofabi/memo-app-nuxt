@@ -38,6 +38,16 @@
   </div>
 </template>
 <script setup lang="ts">
+useHead({
+  title: "Login - Kupown",
+  meta: [
+    {
+      name: "description",
+      content: "Helping people to analyze their finances.",
+    },
+  ],
+});
+
 import { useVuelidate } from "@vuelidate/core";
 import { requiredMessage } from "~/utils/validators";
 

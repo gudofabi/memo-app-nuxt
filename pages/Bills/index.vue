@@ -65,6 +65,16 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: "Bills - Kupown",
+  meta: [
+    {
+      name: "description",
+      content: "You can see here all your created bills.",
+    },
+  ],
+});
+
 import { formatCurrency, formatDate } from "~/utils/utils.ts";
 const { $emitter } = useNuxtApp();
 /*** Bills Store */

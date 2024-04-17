@@ -21,6 +21,15 @@
   </div>
 </template>
 <script setup lang="ts">
+useHead({
+  title: "Verify Account - Kupown",
+  meta: [
+    {
+      name: "description",
+      content: "Helping people to analyze their finances.",
+    },
+  ],
+});
 const authStore = useAuthStore();
 
 const route = useRoute();
