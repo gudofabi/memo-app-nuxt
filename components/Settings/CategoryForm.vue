@@ -29,6 +29,7 @@
           label: 'Percentage',
           placeholder: 'Ex: 30',
           type: 'number',
+          suffix: '%',
         }"
         :validation="$v.percentage"
       />

@@ -35,6 +35,12 @@
           class="cursor-pointer text-2xl"
         ></i>
       </span>
+      <span
+        v-if="$attrs.suffix"
+        class="ml-2 text-gray-400 font-sf-compact font-semibold absolute right-0 py-2 pr-10 text-lg"
+      >
+        {{ $attrs.suffix }}
+      </span>
     </div>
     <p
       v-if="comp_validationErrors"

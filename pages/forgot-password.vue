@@ -82,7 +82,6 @@ const comp_disabledBtn = computed(() => {
 
 /*** Functions */
 const func_handleSubmit = () => {
-  console.log("hi!");
   if (data_loading.value || data_cooldown.value > 0) return;
 
   $v.value.$validate();
