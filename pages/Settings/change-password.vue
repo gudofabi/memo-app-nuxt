@@ -26,7 +26,11 @@
       />
 
       <div class="flex items-center justify-end">
-        <button @click="func_changePassword" type="button" class="kp-btn">
+        <button
+          @click="func_changePassword"
+          type="button"
+          class="kp-btn kp-btn-primary"
+        >
           Change Password
         </button>
       </div>

@@ -34,7 +34,11 @@
         :validation="$v.percentage"
       />
       <div class="flex items-center justify-end">
-        <button class="kp-btn" type="button" @click="func_saveCategory">
+        <button
+          class="kp-btn kp-btn-primary"
+          type="button"
+          @click="func_saveCategory"
+        >
           Add Category
         </button>
       </div>

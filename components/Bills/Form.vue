@@ -37,7 +37,9 @@
         :validation="$v.salary"
       />
       <div class="text-right">
-        <button @click="func_addBill" class="kp-btn">Create Bill</button>
+        <button @click="func_addBill" class="kp-btn kp-btn-primary">
+          Create Bill
+        </button>
       </div>
     </div>
   </div>

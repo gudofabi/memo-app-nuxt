@@ -29,7 +29,7 @@
           :validation="$v.confirm_password"
         />
         <div class="flex items-center justify-end">
-          <button class="kp-btn" type="submit">
+          <button class="kp-btn kp-btn-primary" type="submit">
             {{ data_loading ? "Updating..." : "Create New Password" }}
           </button>
         </div>

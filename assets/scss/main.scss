@@ -21,17 +21,17 @@ h3 {
 }
 
 .kp-btn {
-  @apply relative text-primary py-2 px-5 font-bold text-center cursor-pointer bg-white border-primary;
+  @apply relative text-gray-500 py-2 px-5 font-bold text-center cursor-pointer bg-white border-gray-500;
   cursor: pointer;
   border: 3px solid;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
-  box-shadow: 5px 5px 0 0 black;
+  box-shadow: 5px 5px 0 0 #6b7280;
 }
 
 /* On active press down the button */
 .kp-btn:active {
   transform: translateY(5px);
-  box-shadow: 0 0 0 0 black;
+  box-shadow: 0 0 0 0 #6b7280;
 }
 
 /* Add the distinctive corner cuts */
@@ -61,6 +61,23 @@ h3 {
 .kp-btn-disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+.kp-btn-primary {
+  @apply text-primary  border-primary;
+  box-shadow: 5px 5px 0 0 #0c2d57;
+  &:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 0 #0c2d57;
+  }
+}
+
+.kp-btn-secondary {
+  @apply text-secondary  border-secondary;
+  box-shadow: 5px 5px 0 0 #fc6736;
+  &:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 0 #fc6736;
+  }
 }
 
 .kp-input {

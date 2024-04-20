@@ -39,7 +39,9 @@
         :validation="$v.amount"
       />
       <div class="text-right">
-        <button @click="func_addExpense" class="kp-btn">Add Expense</button>
+        <button @click="func_addExpense" class="kp-btn kp-btn-primary">
+          Add Expense
+        </button>
       </div>
     </div>
   </div>

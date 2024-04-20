@@ -6,8 +6,8 @@
       <h2 class="text-xl font-semibold text-indigo-600">Bill Overview</h2>
       <button
         v-if="billData.status === 'Active'"
-        @click="func_settleBill"
-        class="inline-flex items-center kp-btn"
+        @click="data_showModal = !data_showModal"
+        class="inline-flex items-center kp-btn kp-btn-primary"
       >
         Settle Bill
       </button>
@@ -107,6 +107,28 @@
         {{ func_formatCurrency(comp_totalRemainingBudget) }}
       </p>
     </div>
+
+    <AppModal :show="data_showModal" width="w-[500px]">
+      <template #header>
+        <h2 class="text-2xl font-bold mb-4">Settle Bills</h2>
+      </template>
+      <template #body>
+        <p class="mb-8">
+          Are you sure you want to settle the bills? Once settled, they cannot
+          be modified or deleted.
+        </p>
+      </template>
+      <template #footer>
+        <div class="text-right py-5">
+          <button class="kp-btn mr-4" @click="data_showModal = !data_showModal">
+            Cancel
+          </button>
+          <button class="kp-btn kp-btn-primary" @click="func_settleBill">
+            Confirm
+          </button>
+        </div>
+      </template>
+    </AppModal>
   </div>
 </template>
 
@@ -129,6 +151,7 @@ const emits = defineEmits<{
 // VARS
 const data_totalBills = ref(0);
 const data_totalSaved = ref(0);
+const data_showModal = ref(false);
 
 onMounted(() => {
   data_totalBills.value = props.billData.expenses?.reduce(

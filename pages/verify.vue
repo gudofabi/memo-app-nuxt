@@ -15,7 +15,9 @@
         >
           {{ authStore.message }}
         </h2>
-        <button class="kp-btn" @click="func_redirectLogin">Go to Login</button>
+        <button class="kp-btn kp-btn-primary" @click="func_redirectLogin">
+          Go to Login
+        </button>
       </template>
     </div>
   </div>

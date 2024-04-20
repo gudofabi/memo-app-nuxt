@@ -35,7 +35,10 @@
         :validation="$v.password"
       />
       <div class="text-right">
-        <button class="kp-btn text-primary" @click="func_register">
+        <button
+          class="kp-btn kp-btn-primary text-primary"
+          @click="func_register"
+        >
           Register
         </button>
       </div>
