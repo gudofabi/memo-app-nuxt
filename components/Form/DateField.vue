@@ -27,7 +27,7 @@
 import VueDatePicker from "@vuepic/vue-datepicker";
 
 const props = defineProps<{
-  modelValue?: string | number | null;
+  modelValue?: string | number | null | Date;
   validation?: Object | Array<Object> | any;
   disableDates?: Function | Object | Array<Object> | any;
 }>();

@@ -99,11 +99,9 @@ const func_handleSubmit = () => {
   if (!$v.value.$error) {
     const token = route.query.token as string;
     data_loading.value = true;
-    console.log(token);
     authStore
       .resetPassword(token, data_form.password)
       .then((res) => {
-        console.log(res);
         $emitter.emit("alert-notification", {
           message: res.data.message,
           alertType: "success",
@@ -115,7 +113,6 @@ const func_handleSubmit = () => {
         window.location.href = "/login";
       })
       .catch((err) => {
-        console.log(err);
         $emitter.emit("alert-notification", {
           message: err.response.data.message,
           alertType: "success",

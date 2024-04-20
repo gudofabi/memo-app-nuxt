@@ -21,6 +21,15 @@ export const useBudgetRuleStore = defineStore("budgetRuleStore", () => {
     return loading.value ?? false;
   });
 
+  const getTotal = computed(() => {
+    const categories = budgetRuleCategories.value;
+    let totalPercentage = 0;
+    for (let category of categories) {
+      totalPercentage += category?.percentage;
+    }
+    return totalPercentage;
+  });
+
   /*** Actions */
   const fetchList = async () => {
     loading.value = true;
@@ -48,6 +57,7 @@ export const useBudgetRuleStore = defineStore("budgetRuleStore", () => {
     getBudgetRuleCategories,
     getLoading,
     hasFetchedInitialCategories,
+    getTotal,
     fetchList,
     create,
     destroy,

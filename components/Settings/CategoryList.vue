@@ -27,6 +27,19 @@
       </button>
     </li>
   </ul>
+  <div
+    class="mt-4 p-3 text-center text-lg font-semibold"
+    :class="{
+      'text-red-600 bg-red-100': total !== 100,
+      'text-green-600 bg-green-100': total === 100,
+    }"
+  >
+    Total Percentage: {{ total }}/100
+    <p v-if="total !== 100" class="text-sm text-red-500">
+      (Please adjust to exactly 100%)
+    </p>
+    <p class="text-sm" v-if="total === 100">You are good to go!!!</p>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -34,6 +47,10 @@ const props = defineProps({
   categories: {
     type: [Object, Array],
     required: true,
+  },
+  total: {
+    type: Number,
+    default: 0,
   },
 });
 

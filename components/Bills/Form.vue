@@ -101,7 +101,6 @@ const func_addBill = () => {
         billsStore.fetchList();
       })
       .catch((err) => {
-        console.log(err);
         $emitter.emit("alert-notification", {
           message: "Something went wrong.",
           alertType: "error",

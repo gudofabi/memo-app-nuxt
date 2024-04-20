@@ -26,7 +26,7 @@ onMounted(() => {
 const comp_showBudgetRuleModal = computed(() => {
   return (
     authStore.isAuthenticated &&
-    budgetRuleStore.getBudgetRuleCategories.length === 0 &&
+    budgetRuleStore.getTotal != 100 &&
     !budgetRuleStore.getLoading &&
     budgetRuleStore.hasFetchedInitialCategories &&
     $route.name != "Settings-budget-rule" &&

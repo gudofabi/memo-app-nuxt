@@ -31,6 +31,7 @@
     <h3 class="text-lg font-semibold text-gray-800 mb-2">Your Categories</h3>
     <SettingsCategoryList
       :categories="getBudgetRuleCategories"
+      :total="getTotal"
       @delete="func_deleteCategory"
     />
     <SettingsCategoryForm @save="func_saveCategory" />
@@ -55,7 +56,7 @@ const { $emitter } = useNuxtApp();
 
 /** Budget Rule Store */
 const budgetRuleStore = useBudgetRuleStore();
-const { getBudgetRuleCategories } = storeToRefs(budgetRuleStore);
+const { getBudgetRuleCategories, getTotal } = storeToRefs(budgetRuleStore);
 
 onMounted(() => {
   budgetRuleStore.fetchList();
