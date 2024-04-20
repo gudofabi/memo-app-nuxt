@@ -26,7 +26,11 @@
       />
 
       <div class="flex items-center justify-end">
-        <button class="kp-btn" type="button" @click="func_update">
+        <button
+          class="kp-btn kp-btn-primary"
+          type="button"
+          @click="func_update"
+        >
           Update Profile
         </button>
       </div>

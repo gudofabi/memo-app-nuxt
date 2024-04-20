@@ -8,7 +8,7 @@
         Please set up your budget rules to continue using the app.
       </p>
       <div class="text-right">
-        <NuxtLink href="/settings/budget-rule" class="kp-btn">
+        <NuxtLink href="/settings/budget-rule" class="kp-btn kp-btn-primary">
           Go to Settings
         </NuxtLink>
       </div>

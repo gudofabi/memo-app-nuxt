@@ -32,7 +32,9 @@
         >
           <NuxtLink href="/forgot-password" class="">Forgot Password?</NuxtLink>
         </p>
-        <button class="kp-btn text-primary" @click="func_login">Login</button>
+        <button class="kp-btn kp-btn-primary text-primary" @click="func_login">
+          Login
+        </button>
       </div>
     </div>
   </div>
