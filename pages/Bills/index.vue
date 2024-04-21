@@ -49,7 +49,7 @@
                 ></router-link>
                 <button
                   v-if="bill.status === 'Active'"
-                  @click="func_deleteBill(bill._id as string)"
+                  @click="func_showModal(bill._id as string)"
                   class="text-red-600 hover:text-white transition duration-150 ease-in-out font-medium text-xl bg-white hover:bg-red-600 rounded-full hover:shadow-md w-[35px] h-[35px] border text-center pt-1"
                 >
                   <i class="ph ph-trash-simple"></i>
@@ -66,6 +66,27 @@
       <BillsForm />
     </div>
   </div>
+  <AppModal :show="data_showModal" width="w-[500px]">
+    <template #header>
+      <h2 class="text-2xl font-bold mb-4">Delete Bill</h2>
+    </template>
+    <template #body>
+      <p class="mb-6">
+        Are you sure you want to delete the bill? Once deleted, it cannot be
+        retrieved.
+      </p>
+    </template>
+    <template #footer>
+      <div class="text-right">
+        <button class="kp-btn mr-4" @click="data_showModal = !data_showModal">
+          Cancel
+        </button>
+        <button class="kp-btn kp-btn-primary" @click="func_deleteBill">
+          Confirm
+        </button>
+      </div>
+    </template>
+  </AppModal>
 </template>
 
 <script setup lang="ts">
@@ -89,6 +110,8 @@ const data_filters = reactive({
   current_page: 1,
   total_pages: computed(() => billsStore.totalPages ?? 0),
 });
+const data_showModal = ref(false);
+const data_selectedBill = ref("");
 
 onMounted(() => {
   // the second parameter is the limit
@@ -96,6 +119,10 @@ onMounted(() => {
 });
 
 /*** Functions */
+const func_showModal = (billId: string) => {
+  data_selectedBill.value = billId;
+  data_showModal.value = true;
+};
 
 function func_changePage(newPage: number) {
   if (newPage < 1 || newPage > data_filters?.total_pages) return;
@@ -113,9 +140,9 @@ const func_formatDate = (date: any) => {
   return formatDate(date);
 };
 
-const func_deleteBill = (id: string) => {
+const func_deleteBill = () => {
   billsStore
-    .destroy(id)
+    .destroy(data_selectedBill.value)
     .then((res) => {
       $emitter.emit("alert-notification", {
         message: res?.data.message,
@@ -124,6 +151,8 @@ const func_deleteBill = (id: string) => {
         show: true,
       });
       billsStore.fetchList();
+      data_showModal.value = false;
+      data_selectedBill.value = "";
     })
     .catch((err) => {
       $emmiter.emit("alert-notification", {
