@@ -1,8 +1,8 @@
 import type { AxiosInstance } from "axios";
 
 export const bills = (axios: AxiosInstance) => ({
-  async getBills(): Promise<any> {
-    return axios.get("/bills/");
+  async getBills(page: number, limit: number): Promise<any> {
+    return axios.get(`/bills/?page=${page}&limit=${limit}`);
   },
 
   async getBillById(id: string): Promise<any> {

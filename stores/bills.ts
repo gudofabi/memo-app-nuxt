@@ -10,6 +10,8 @@ export const useBillsStore = defineStore("billsStore", () => {
   /*** State */
   const billList = ref([]);
   const bill = ref({});
+  const totalPages = ref(0);
+  const currentPage = ref(0);
   const loading = ref(false);
   const errors = ref({});
   const message = ref("");
@@ -28,12 +30,14 @@ export const useBillsStore = defineStore("billsStore", () => {
   });
 
   /*** Actions */
-  const fetchList = () => {
+  const fetchList = (page: number, limit: number) => {
     loading.value = true;
     billsRepo
-      .getBills()
+      .getBills(page, limit)
       .then((res) => {
         billList.value = res.data.result;
+        totalPages.value = res.data.pagination.totalPages; // Assuming the API returns total pages
+        currentPage.value = page; // Update current page
         message.value = res.data.message;
       })
       .catch((err) => {
@@ -77,5 +81,7 @@ export const useBillsStore = defineStore("billsStore", () => {
     getBills,
     getBill,
     getLoading,
+    totalPages,
+    currentPage,
   };
 });

@@ -57,6 +57,10 @@
               </div>
             </li>
           </ul>
+          <AppPagination
+            :filters="data_filters"
+            @change-page="func_changePage"
+          />
         </div>
       </div>
       <BillsForm />
@@ -81,11 +85,24 @@ const { $emitter } = useNuxtApp();
 const billsStore = useBillsStore();
 const { getBills, getLoading } = storeToRefs(billsStore);
 
+const data_filters = reactive({
+  current_page: 1,
+  total_pages: computed(() => billsStore.totalPages ?? 0),
+});
+
 onMounted(() => {
-  billsStore.fetchList();
+  // the second parameter is the limit
+  billsStore.fetchList(data_filters.current_page, 7);
 });
 
 /*** Functions */
+
+function func_changePage(newPage: number) {
+  if (newPage < 1 || newPage > data_filters?.total_pages) return;
+  data_filters.current_page = newPage;
+  // the second parameter is the limit
+  billsStore.fetchList(newPage, 7);
+}
 
 const func_formatCurrency = (value: number | null | undefined) => {
   return formatCurrency(value);
