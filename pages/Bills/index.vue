@@ -63,7 +63,7 @@
           />
         </div>
       </div>
-      <BillsForm />
+      <BillsForm :filters="data_filters" @save="func_changePage" />
     </div>
   </div>
   <AppModal :show="data_showModal" width="w-[500px]">
@@ -108,6 +108,7 @@ const { getBills, getLoading } = storeToRefs(billsStore);
 
 const data_filters = reactive({
   current_page: 1,
+  limit: 7,
   total_pages: computed(() => billsStore.totalPages ?? 0),
 });
 const data_showModal = ref(false);
@@ -115,7 +116,7 @@ const data_selectedBill = ref("");
 
 onMounted(() => {
   // the second parameter is the limit
-  billsStore.fetchList(data_filters.current_page, 7);
+  billsStore.fetchList(data_filters.current_page, data_filters.limit);
 });
 
 /*** Functions */
@@ -128,7 +129,7 @@ function func_changePage(newPage: number) {
   if (newPage < 1 || newPage > data_filters?.total_pages) return;
   data_filters.current_page = newPage;
   // the second parameter is the limit
-  billsStore.fetchList(newPage, 7);
+  billsStore.fetchList(newPage, data_filters.limit);
 }
 
 const func_formatCurrency = (value: number | null | undefined) => {
@@ -150,7 +151,7 @@ const func_deleteBill = () => {
         timeout: 3000,
         show: true,
       });
-      billsStore.fetchList();
+      billsStore.fetchList(data_filters.current_page, data_filters.limit);
       data_showModal.value = false;
       data_selectedBill.value = "";
     })

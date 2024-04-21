@@ -49,8 +49,18 @@
 import { useVuelidate } from "@vuelidate/core";
 import { requiredMessage } from "~/utils/validators";
 const { $emitter } = useNuxtApp();
+
 /*** Bills Store */
 const billsStore = useBillsStore();
+
+const props = defineProps<{
+  filters: {
+    current_page: Number | any;
+    limit: Number | any;
+  };
+}>();
+
+const emits = defineEmits(["save"]);
 
 const data_errors = {};
 const data_message = {};
@@ -100,7 +110,8 @@ const func_addBill = () => {
           timeout: 3000,
           show: true,
         });
-        billsStore.fetchList();
+        billsStore.fetchList(1, props.filters.limit);
+        emits("save", 1);
       })
       .catch((err) => {
         $emitter.emit("alert-notification", {
